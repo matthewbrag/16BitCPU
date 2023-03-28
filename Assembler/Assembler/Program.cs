@@ -1,33 +1,29 @@
 ﻿
 using Assembler;
 
-var assembler = new ProgramAssembler();
+class Program
+{
+    static void Main(string[] args)
+    {
+        if (args.Length != 1)
+        {
+            Console.WriteLine("Usage: Program.exe [input_file_path]");
+            return;
+        }
 
-var code = @"
+        var inputFile = args[0];
+        var outputFile = Path.GetFileNameWithoutExtension(inputFile) + ".hex";
+        var outputPath = Path.GetDirectoryName(inputFile);
 
-//input numbers
-INP 0 r0
-INP 1 r1
+        var code = File.ReadAllText(inputFile);
 
-//subtract
-INOP SUB r2, r0, r1
+        var assembler = new ProgramAssembler();
+        var assembledCode = assembler.Assemble(code);
 
-//jump if result is negative
-JCN NEG NEG_OUTPUT
+        File.WriteAllText(outputPath + "\\" + outputFile, assembledCode);
 
-//if result is positive output to output 0
-OUT 0 r2
+        Console.WriteLine(code);
 
-//skip negative output
-JMP END
-
-LABEL NEG_OUTPUT
-
-OUT 1 r2
-
-LABEL END
-
-HLT
-";
-
-Console.WriteLine(assembler.Assemble(code));
+        Console.WriteLine($"Assembled code saved to {outputPath}/{outputFile}");
+    }
+}

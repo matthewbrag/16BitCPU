@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Assembler": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Users\\mbragonje\\Desktop\\16BitCPU\\Programs\\AsciiNPrint.txt\""
+    }
+  }
+}

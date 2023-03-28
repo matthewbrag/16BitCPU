@@ -36,7 +36,7 @@ internal class AssemblerFactory
         }
         else
         {
-            throw new Exception("Unrecognized OP");
+            throw new Exception("Unrecognized Opertaion: "  + instruction.GetString());
         }
             
     }
@@ -78,7 +78,7 @@ internal class AssemblerFactory
                     throw new Exception("Input out of range");
 
                 var toReg = ins.Arguments[1] as Register;
-                return $"3{ToHex(inp)}0{ToHex(toReg)}";
+                return $"3{ToHexSingle(inp)}0{ToHex(toReg)}";
             }
         },
         {new InstructionSelector("OUT", new ArgumentType[]{ArgumentType.Literal, ArgumentType.Register}),(ins, mappings) =>
@@ -188,6 +188,10 @@ internal class AssemblerFactory
         return register.Value.ToString("X");
     }
     private static string ToHex(Literal literal)
+    {
+        return literal.Value.ToString("X4");
+    }
+    private static string ToHexSingle(Literal literal)
     {
         return literal.Value.ToString("X");
     }
