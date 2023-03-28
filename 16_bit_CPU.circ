@@ -194,14 +194,11 @@
     <comp lib="3" loc="(530,120)" name="Adder">
       <a name="width" val="16"/>
     </comp>
-    <comp lib="3" loc="(530,190)" name="Negator">
-      <a name="width" val="16"/>
-    </comp>
     <comp lib="3" loc="(530,240)" name="Multiplier">
       <a name="mode" val="twosComplement"/>
       <a name="width" val="16"/>
     </comp>
-    <comp lib="3" loc="(600,180)" name="Adder">
+    <comp lib="3" loc="(600,180)" name="Subtractor">
       <a name="width" val="16"/>
     </comp>
     <comp lib="3" loc="(600,300)" name="Shifter">
@@ -282,7 +279,7 @@
     <wire from="(430,130)" to="(430,190)"/>
     <wire from="(430,130)" to="(490,130)"/>
     <wire from="(430,190)" to="(430,200)"/>
-    <wire from="(430,190)" to="(490,190)"/>
+    <wire from="(430,190)" to="(560,190)"/>
     <wire from="(430,200)" to="(430,250)"/>
     <wire from="(430,250)" to="(430,310)"/>
     <wire from="(430,250)" to="(490,250)"/>
@@ -302,7 +299,6 @@
     <wire from="(520,400)" to="(650,400)"/>
     <wire from="(520,450)" to="(660,450)"/>
     <wire from="(530,120)" to="(680,120)"/>
-    <wire from="(530,190)" to="(560,190)"/>
     <wire from="(530,240)" to="(620,240)"/>
     <wire from="(530,500)" to="(670,500)"/>
     <wire from="(540,150)" to="(540,220)"/>
@@ -1805,11 +1801,12 @@
       <text dominant-baseline="central" font-family="SansSerif" font-size="12" text-anchor="middle" x="86" y="208">R_EF_VAL</text>
       <text dominant-baseline="central" font-family="SansSerif" font-size="12" text-anchor="middle" x="87" y="228">R_EF_SET</text>
       <text dominant-baseline="central" font-family="SansSerif" font-size="12" text-anchor="middle" x="76" y="270">RESET</text>
-      <visible-register height="10" path="/Register(720,1000)" stroke-width="0" width="26" x="203" y="179"/>
       <text dominant-baseline="central" font-family="SansSerif" font-size="12" text-anchor="middle" x="249" y="62">OUT</text>
       <text dominant-baseline="central" font-family="SansSerif" font-size="12" text-anchor="middle" x="240" y="90">OUT_2</text>
       <text dominant-baseline="central" font-family="SansSerif" font-size="12" text-anchor="middle" x="230" y="301">AB_OUT</text>
       <text dominant-baseline="central" font-family="SansSerif" font-size="12" text-anchor="middle" x="236" y="322">CD_OUT</text>
+      <text dominant-baseline="central" font-family="SansSerif" font-size="12" text-anchor="start" x="160" y="196">a</text>
+      <visible-register height="10" path="/Register(720,1000)" stroke-width="0" width="26" x="203" y="179"/>
       <visible-register height="10" path="/Register(720,300)" stroke-width="0" width="26" x="203" y="100"/>
       <visible-register height="10" path="/Register(720,400)" stroke-width="0" width="26" x="203" y="110"/>
       <visible-register height="10" path="/Register(720,500)" stroke-width="0" width="26" x="203" y="121"/>
@@ -1825,7 +1822,6 @@
       <visible-register height="10" path="/Register(720,1600)" stroke-width="0" width="26" x="203" y="246"/>
       <visible-register height="10" path="/Register(720,1700)" stroke-width="0" width="26" x="203" y="257"/>
       <visible-register height="10" path="/Register(720,1800)" stroke-width="0" width="26" x="203" y="269"/>
-      <text dominant-baseline="central" font-family="SansSerif" font-size="12" text-anchor="start" x="160" y="196">a</text>
       <circ-anchor facing="east" x="270" y="60"/>
       <circ-port dir="in" pin="130,350" x="50" y="270"/>
       <circ-port dir="in" pin="140,230" x="50" y="130"/>

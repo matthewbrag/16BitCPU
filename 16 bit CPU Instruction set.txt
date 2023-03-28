@@ -40,8 +40,8 @@ flt_alu operations
 001 sub
 010 multiply
 011 divide
-100 float to int (int is rd)
-101 int to float (int is r9)
+100 float to int (int is reg e)
+101 int to float (int is reg a)
 
 jump conditions
 000 int_zero
@@ -57,39 +57,98 @@ sections:
 
 next code                desc
 0    0000 0000 0000 0000 continue
+          CONT
 0    0000 0000 0000 0001 halt
+          HLT
 
 1    0001 0000 0000 rrrr next word into register r
+          LD [literal], [register to set]
 
 0    0010 0000 aaaa bbbb register a into register b
+          MOV [register to move], [register to set]
 
 0    0011 00ii 0000 rrrr input i to register r
+          INP [literal 0-3], [register to set]
 0    0011 01oo 0000 rrrr output register r to output o
+          OUT [literal 0-3], [register to output]
 
 0    0100 0000 aaaa bbbb set GP RAM address reg A to value reg B
+               GPSET [register of address to set], [register of value to set]
 0    0100 0001 aaaa bbbb set reg B to value at GP RAM address reg A
-
+               GPLD [register of address to read], [register to be set]
 -0    0101 0000 aaaa bbbb set PRGM RAM address reg A to value reg B
 -0    0101 0001 aaaa bbbb set reg B to PRGM ram address reg A
 
 1    0110 0ooo rrrr aaaa int alu operation reg r = reg a (op) reg b
      0000 0000 0000 bbbb
+               INOP [operation], [register to be set], [register of argument 1], [register of argument 2]
  
 1    0111 0ooo rrrr aaaa int alu operation reg r = reg a (op) next word 
      nnnn nnnn nnnn nnnn
+               INOP [operation], [register for result], [register of argument 1], [literal for argument 2]
 1    0111 1ooo rrrr aaaa int alu operation reg r = next word (op) reg a
      nnnn nnnn nnnn nnnn
+               INOP [operation], [register for result], [literal for argument 1], [register of argument 2]
 
 -0    1000 0ooo aaaa bbbb int alu operation no return value reg a (op) reg b
 
 0    1001 0ooo 0000 0000 32 bit float alu operation re, rf = ra, rb (op) rc, rd
+               FLOP [operation]
 -0    1001 1ooo 0000 0000 32 bit float alu operation no return ra, rp (op) rc, rd
 
 1    1010 0000 0000 0000 jump to address in next word
      nnnn nnnn nnnn nnnn
+               JMP [label]
 1    1010 0001 0xxx 0000 if x jump to address in next word
      nnnn nnnn nnnn nnnn
+               JCN [condition], [label]
 
 -0    1011 0000 0000 rrrr jump to value in reg r 
 -0    1011 0001 0xxx rrrr if x jump to value in reg r
 
+Assembly instructions
+
+CONT
+HLT
+LABEL [label]
+LD [literal], [register to set]
+MOV [register to move], [register to set]
+INP [literal 0-3 which input], [register to set]
+OUT [literal 0-3 which output], [register to output]
+GPSET [register of address to set], [register of value to set]
+GPLD [register of address to read], [register to be set]
+INOP [operation], [register to be set], [register of argument 1], [register of argument 2]
+INOP [operation], [register to be set], [register of argument 1], [literal for argument 2]
+INOP [operation], [register to be set], [literal for argument 1], [register of argument 2]
+FLOP [operation] (RE, RF = RA, RB (operation) RC, RD)
+JMP [label]
+JCN [condition], [label]
+
+Assembly literals/constants/ect
+operations
+     ADD
+     SUB
+     MULT
+     ROT
+     DIV
+     AND
+     NOT
+     OR
+     XOR
+     FLT
+     INT
+Conditions
+     NEG
+     POS
+     ZERO
+     OVF
+     FNEG
+     FPOS
+     FZERO
+     FERR
+Numbers
+     0b0000_0000_0000_0000 binary literal
+     0xFACE hex literal
+     12/-12 decimal literal
+     0f456.75 first half of floating point literal
+     0s456.75 second half of floating point literal
