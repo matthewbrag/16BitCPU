@@ -143,7 +143,7 @@ internal class AssemblerFactory
                 var rega = inst.Arguments[2] as Register;
                 var lit = inst.Arguments[3] as Literal;
 
-                return ($"6{ToHex(op)}{ToHex(regResult)}{ToHex(rega)}", ToHex(lit));
+                return ($"7{ToHex(op)}{ToHex(regResult)}{ToHex(rega)}", ToHex(lit));
             }
         },
         {
@@ -154,7 +154,7 @@ internal class AssemblerFactory
                 var rega = inst.Arguments[3] as Register;
                 var lit = inst.Arguments[2] as Literal;
 
-                return ($"6{op.Value + 8:X}{ToHex(regResult)}{ToHex(rega)}", ToHex(lit));
+                return ($"7{op.Value + 8:X}{ToHex(regResult)}{ToHex(rega)}", ToHex(lit));
             }
         },
         {

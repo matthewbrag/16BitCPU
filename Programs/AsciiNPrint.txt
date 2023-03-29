@@ -3,7 +3,7 @@ LD 0 r_a
 
 LABEL print_loop
 
-    //load value from memory
+    //load value from memory to r_1
     GPLD r_a, r_1
 
     //if value is 0 (ASCII NULL) exit
@@ -12,8 +12,17 @@ LABEL print_loop
 
     //else output value
     OUT 0, r_1 
+
+    //inc pointer
     
+    INOP ADD, r_a, r_a,1
+
     //and loop again
     JMP print_loop
 
 LABEL end
+
+LD 0, r0
+LD 0xffff, r1
+GPSET r0, r1
+HLT
