@@ -1,34 +1,19 @@
-//print string from GP memory n times
+//use r_a to represent memory pointer
+LD 0 r_a
 
-//input number of times
-INP 0 r0
+LABEL print_loop
 
-//r3 keeps track of times looped
-LD 0 r3
+    //load value from memory
+    GPLD r_a, r_1
 
-LABEL main_loop
+    //if value is 0 (ASCII NULL) exit
+    INOP SUB, r_f, r_1, 0
+    JCN ZERO, end
 
-//exit program when we are done
-INOP SUB rf r3 r0
-JCN ZERO end
-
-//inc r3
-
-INOP ADD r3 r3 1
-
-//string pointer
-LD 0 r1
-
-LABEL print_char
-GPLD r1 r2
-
-//if the character is null, restart loop
-INOP SUB rf r2 0
-JCN ZERO main_loop
-
-OUT 0 r2
-
-JMP print_char
+    //else output value
+    OUT 0, r_1 
+    
+    //and loop again
+    JMP print_loop
 
 LABEL end
-HLT
